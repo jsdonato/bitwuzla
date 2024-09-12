@@ -1,9 +1,9 @@
 [wrap-file]
-directory = kissat-rel-3.0.0
+directory = kissat-rel-4.0.0
 
-source_url = https://github.com/arminbiere/kissat/archive/refs/tags/rel-3.0.0.tar.gz
-source_filename = kissat-rel-3.0.0.tar.gz
-source_hash = 230895b3beaec5f2c78f6cc520a7db94b294edf244cbad37e2ee6a8a63bd7bdf
+source_url = https://github.com/arminbiere/kissat/archive/refs/tags/rel-4.0.0.tar.gz
+source_filename = kissat-rel-4.0.0.tar.gz
+source_hash = e04b37adf89ee6295ddc9756f9e5c35a98aa0aa6c01656bd282494e297fc7543
 
 patch_directory = kissat
 
