@@ -1518,6 +1518,21 @@ cdef class Parser:
                     <const string&> str(language).encode(),
                     &bitwuzla_api.cout))
 
+    def configure_auto_print_model(self, value: bool):
+        """Enable or disable the automatic printing of the model after each
+           satisfiable query.
+
+           Enable to automatically print the model after every sat query.
+           Must be enabled to automatically print models for BTOR2 input (does
+           not provide a command to print the model like `(get-model)` in
+           SMT-LIB2). False (default) configures the standard behavior for
+           SMT-LIB2 input (print model only after a `(get-model)` command).
+
+           :note: By default, auto printing of the model is disabled.
+           :param value: True to enable auto printing of the model.
+        """
+        self.c_parser.get().configure_auto_print_model(value)
+
     def parse(self,
               iinput,
               parse_only: bool = False,

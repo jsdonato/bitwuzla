@@ -110,10 +110,12 @@ Parser::parse(const std::string& infile_name,
         // If no safety properties checked, do one check-sat call.
         bitwuzla::Result res = d_bitwuzla->check_sat();
         std::cout << res << std::endl;
-        if (d_options.get(bitwuzla::Option::PRODUCE_MODELS)
-            && res == bitwuzla::Result::SAT)
+        if (d_auto_print_model && res == bitwuzla::Result::SAT)
         {
-          print_model();
+          if (!print_model())
+          {
+            return false;
+          }
         }
       }
       else
@@ -131,9 +133,12 @@ Parser::parse(const std::string& infile_name,
           if (res == bitwuzla::Result::SAT)
           {
             (*d_out) << " satisfiable." << std::endl;
-            if (d_options.get(bitwuzla::Option::PRODUCE_MODELS))
+            if (d_auto_print_model)
             {
-              print_model();
+              if (!print_model())
+              {
+                return false;
+              }
             }
           }
           else if (res == bitwuzla::Result::UNSAT)
@@ -204,6 +209,12 @@ Parser::parse_sort(const std::string& input, bitwuzla::Sort& res)
 bool
 Parser::print_model()
 {
+  if (!d_options.get(bitwuzla::Option::PRODUCE_MODELS))
+  {
+    d_error = "model generation is not enabled";
+    return false;
+  }
+
   std::stringstream ss;
   for (const auto& [id, input] : d_inputs)
   {

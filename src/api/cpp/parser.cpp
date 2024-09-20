@@ -59,6 +59,13 @@ Parser::parse(const std::string &input, bool parse_only, bool parse_file)
 }
 
 void
+Parser::configure_auto_print_model(bool value)
+{
+  assert(d_parser);
+  d_parser->configure_auto_print_model(value);
+}
+
+void
 Parser::parse(const std::string &infile_name,
               std::istream &input,
               bool parse_only)

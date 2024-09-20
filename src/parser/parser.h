@@ -27,9 +27,9 @@ class Parser
  public:
   /**
    * Constructor.
-   * @param options     The associated Bitwuzla options. Parser creates
-   *                    Bitwuzla instance from these options.
-   * @param out         The output stream.
+   * @param options  The associated Bitwuzla options. Parser creates Bitwuzla
+   *                 instance from these options.
+   * @param out      The output stream.
    * @note It is not safe to reuse a parser instance after a parse error.
    *       Subsequent parse queries after a parse error will return with
    *       an error.
@@ -49,6 +49,22 @@ class Parser
 
   /** Destructor. */
   virtual ~Parser() {}
+
+  /**
+   * Enable or disable the automatic printing of the model after each
+   * satisfiable query.
+   *
+   * Set to true to automatically print the model after every sat query. Must
+   * be enabled to automatically print models for BTOR2 input (does not provide
+   * a command to print the model like `(get-model)` in SMT-LIB2).
+   * False (default) configures the standard behavior for SMT-LIB2 input (print
+   * model only after a `(get-model)` command).
+   *
+   * @note By default, auto printing of the model is disabled.
+   *
+   * @param value True to enable auto printing of the model.
+   */
+  void configure_auto_print_model(bool value) { d_auto_print_model = value; }
 
   /**
    * Parse input, either from a file or from a string.
@@ -171,6 +187,13 @@ class Parser
   bitwuzla::Result d_status = bitwuzla::Result::UNKNOWN;
   /** The result of the last check-sat call. */
   bitwuzla::Result d_result = bitwuzla::Result::UNKNOWN;
+
+  /**
+   * True to automatically print the model after every sat query.
+   * False (default) only prints the model after a `(get-model)` command for
+   * SMT-LIB2 input, and does not print the model for BTOR2 input.
+   */
+  bool d_auto_print_model = false;
 
   /** True if parser is done parsing. */
   bool d_done = false;

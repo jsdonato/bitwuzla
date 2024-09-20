@@ -76,6 +76,15 @@ bitwuzla_parser_delete(BitwuzlaParser* parser)
 }
 
 void
+bitwuzla_parser_configure_auto_print_model(BitwuzlaParser* parser, bool value)
+{
+  BITWUZLA_TRY_CATCH_BEGIN;
+  BITWUZLA_CHECK_NOT_NULL(parser);
+  parser->d_parser->configure_auto_print_model(value);
+  BITWUZLA_TRY_CATCH_END;
+}
+
+void
 bitwuzla_parser_parse(BitwuzlaParser* parser,
                       const char* input,
                       bool parse_only,

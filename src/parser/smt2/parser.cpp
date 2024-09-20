@@ -331,6 +331,7 @@ Parser::parse_command_check_sat(bool parse_only, bool with_assumptions)
   init_logic();
   init_bitwuzla();
   d_assumptions.clear();
+
   if (with_assumptions)
   {
     if (!parse_lpar())
@@ -396,6 +397,10 @@ Parser::parse_command_check_sat(bool parse_only, bool with_assumptions)
     (*d_out) << "unknown" << std::endl;
   }
   d_out->flush();
+  if (d_auto_print_model)
+  {
+    return print_model();
+  }
   return true;
 }
 
@@ -686,7 +691,11 @@ Parser::parse_command_get_model()
   {
     return false;
   }
-  return print_model();
+  if (!d_auto_print_model)
+  {
+    return print_model();
+  }
+  return true;
 }
 
 bool

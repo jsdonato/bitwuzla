@@ -24,9 +24,9 @@ class Parser : public bzla::parser::Parser
  public:
   /**
    * Constructor.
-   * @param options     The associated Bitwuzla options. Parser creates
-   *                    Bitwuzla instance from these options.
-   * @param out         The output stream.
+   * @param options  The associated Bitwuzla options. Parser creates Bitwuzla
+   *                 instance from these options.
+   * @param out      The output stream.
    */
   Parser(bitwuzla::TermManager& tm,
          bitwuzla::Options& options,

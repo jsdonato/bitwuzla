@@ -59,6 +59,24 @@ BitwuzlaParser* bitwuzla_parser_new(BitwuzlaTermManager* tm,
 void bitwuzla_parser_delete(BitwuzlaParser* parser);
 
 /**
+ * Enable or disable the automatic printing of the model after each
+ * satisfiable query.
+ *
+ * Enable to automatically print the model after every sat query. Must be
+ * enabled to automatically print models for BTOR2 input (does not provide a
+ * command to print the model like `(get-model)` in SMT-LIB2). False (default)
+ * configures the standard behavior for SMT-LIB2 input (print model only after
+ * a `(get-model)` command).
+ *
+ * @note By default, auto printing of the model is disabled.
+ *
+ * @param parser     The Bitwuzla parser instance.
+ * @param value True to enable auto printing of the model.
+ */
+void bitwuzla_parser_configure_auto_print_model(BitwuzlaParser* parser,
+                                                bool value);
+
+/**
  * Parse input, either from a file or from a string.
  *
  * @param parser     The Bitwuzla parser instance.
