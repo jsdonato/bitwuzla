@@ -84,6 +84,7 @@ sources = [
   'sweep.c',
   'terminate.c',
   'trail.c',
+  'transitive.c',
   'utilities.c',
   'vector.c',
   'vivify.c',
